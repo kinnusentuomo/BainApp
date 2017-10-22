@@ -14,6 +14,8 @@ import android.widget.Toast;
  * Created by tuomo on 10.10.2017.
  */
 
+//
+
 class CustomDialogClass extends Dialog implements
         android.view.View.OnClickListener {
 
