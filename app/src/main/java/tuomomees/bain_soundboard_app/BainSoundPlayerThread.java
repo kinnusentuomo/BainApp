@@ -11,7 +11,7 @@ import java.util.Observer;
 /**
  * Created by tuomo on 3.10.2017.
  */
-
+//
 class BainSoundPlayerThread extends Thread {
 
     private boolean running = true;
