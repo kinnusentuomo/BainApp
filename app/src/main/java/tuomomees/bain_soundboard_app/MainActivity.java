@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +16,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity implements BainSoundPlayerThread.MediaPlayerThreadInterface{
 
@@ -154,87 +151,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         setButtonPlaying(true, buttonId);
         Log.d("Button pressed", String.valueOf(v.getId()));
 
-        /*
-        switch (v.getId()){
-            case R.id.buttonBain1:
-                resources = R.raw.bain_alarm;
-                bainPhraseString = "That's the alarm, time to do some heavy lifting.";
-                break;
-            case R.id.buttonBain2:
-                resources = R.raw.bain_boss;
-                bainPhraseString = "Show them whos boss.";
-                break;
-            case R.id.buttonBain3:
-                resources = R.raw.bain_busy;
-                bainPhraseString = "Looks like we're about to get busy.";
-                break;
-            case R.id.buttonBain4:
-                resources = R.raw.bain_cleanercosts;
-                bainPhraseString = "Don't kill civilians.";
-                break;
-            case R.id.buttonBain5:
-                resources = R.raw.bain_flashlight;
-                bainPhraseString = "Stay out of the flashlights people.";
-                break;
-            case R.id.buttonBain6:
-                resources = R.raw.bain_go;
-                bainPhraseString = "Come on guys go!";
-                break;
-            case R.id.buttonBain7:
-                resources = R.raw.bain_guys;
-                bainPhraseString = "Thats my guys.";
-                break;
-            case R.id.buttonBain8:
-                resources = R.raw.bain_here_we_go;
-                bainPhraseString = "Here we go.";
-                break;
-            case R.id.buttonBain9:
-                resources = R.raw.bain_hostage;
-                bainPhraseString = "Alright, let the hostage go and the trade is done.";
-                break;
-            case R.id.buttonBain10:
-                resources = R.raw.bain_hostage2;
-                bainPhraseString = "a hostage.";
-                break;
-            case R.id.buttonBain11:
-                resources = R.raw.bain_let_the_hostage_go;
-                bainPhraseString = "Let the hostage go and the trade is done.";
-                break;
-            case R.id.buttonBain12:
-                resources = R.raw.bain_loot;
-                bainPhraseString = "Don't let them take your loot.";
-                break;
-            case R.id.buttonBain13:
-                resources = R.raw.bain_sniper;
-                bainPhraseString = "Sniper rooftop.";
-                break;
-            case R.id.buttonBain14:
-                resources = R.raw.bain_yes;
-                bainPhraseString = "YES.";
-                break;
-            case R.id.buttonBain15:
-                resources = R.raw.bain_two;
-                bainPhraseString = "That's two one more to go.";
-                break;
-            case R.id.buttonBain16:
-                resources = R.raw.bain_escape;
-                bainPhraseString = "Vans here, say it again the escape vans here.";
-                break;
-            case R.id.buttonBain17:
-                resources = R.raw.bain_needcivilians;
-                bainPhraseString = "Remember guys we need ____ civilians.";
-                break;
-            case R.id.buttonBain18:
-                resources = R.raw.bain_civilians;
-                bainPhraseString = "Civilians.";
-                break;
-
-            default:
-                resources = R.raw.bain_cleanercosts;
-                bainPhraseString = "Don't kill civilians. (DEFAULT)";
-        }
-        */
-
         bainPhraseTextView.setText(bainPhraseString);
 
             if(bainSoundPlayerThread == null)
@@ -279,7 +195,8 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                             isThreadPlaying = true;
                             //button.setBackground(playingOn);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                icon = getResources().getDrawable(R.drawable.play_icon);
+                                //icon = getResources().getDrawable(R.drawable.play_icon); //Vanhentunut metodi
+                                icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
                                 button.setForeground(icon);
                             }
                         }
