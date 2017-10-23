@@ -11,7 +11,7 @@ import java.util.Observer;
 /**
  * Created by tuomo on 3.10.2017.
  */
-//
+
 class BainSoundPlayerThread extends Thread {
 
     private boolean running = true;
@@ -62,7 +62,6 @@ class BainSoundPlayerThread extends Thread {
                         observer.setButtonPlaying(false, sentButtonId);
                         mp.release();
                         playingAudio = false;
-                        observer.removeFromList(listId);
                         running = false;
                     }
                 });
@@ -77,6 +76,5 @@ class BainSoundPlayerThread extends Thread {
     interface MediaPlayerThreadInterface
     {
         void setButtonPlaying(boolean isButtonPlaying, int btnId);
-        void removeFromList(int id);
     }
 }

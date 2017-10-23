@@ -1,6 +1,5 @@
 package tuomomees.bain_soundboard_app;
 
-import android.animation.Animator;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,24 +23,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements BainSoundPlayerThread.MediaPlayerThreadInterface{
 
     BainSoundPlayerThread bainSoundPlayerThread = null;
-    int resources;
+    int resources; //Toistettava tiedosto
     int buttonId;
     Button button;
     TextView bainPhraseTextView;
-
+    ListView listView;
+    CustomListViewAdapter customListViewAdapterdapter;
     CustomDialogClass cdd;
-
-    Drawable playingOn;
-    Drawable playingOff;
 
     String bainPhraseString;
 
     int listId;
 
-    private static int buttonAmount = 18;
-    //
-
-    List<BainSoundPlayerThread> threadList=new ArrayList<BainSoundPlayerThread>();
+    Boolean isThreadPlaying = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +45,14 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         bainPhraseTextView = (TextView) findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
 
+        //LISTVIEW TESTI
+        listView = (ListView) findViewById(R.id.buttonListView);
+        String[] items={"1","2","3","4","5", "6", "7", "8"}; //ROW AMOUNT
+        customListViewAdapterdapter = new CustomListViewAdapter(this, R.layout.listview_item ,R.id.textViewInList, items);
+        listView.setAdapter(customListViewAdapterdapter);
+        //END
+
         cdd=new CustomDialogClass(this);
-        playingOn = getResources().getDrawable(R.mipmap.payday2_bain_play);
-        playingOff = getResources().getDrawable(R.mipmap.payday2_bain);
 
         //Asettaa äänensäännön applikaatioista tulevaan ääneen, eikä hälytysääneen
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -65,10 +65,96 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBainButtonClicked(View v)
     {
+
+        if(!isThreadPlaying)
+        {
+        Button bt=(Button)v;
+        int id = bt.getId();
+        switch (id)
+        {
+            case 1:
+                resources = R.raw.bain_alarm;
+                bainPhraseString = "That's the alarm, time to do some heavy lifting.";
+                break;
+            case 2:
+                resources = R.raw.bain_boss;
+                bainPhraseString = "Show them whos boss.";
+                break;
+            case 3:
+                resources = R.raw.bain_busy;
+                bainPhraseString = "Looks like we're about to get busy.";
+                break;
+            case 4:
+                resources = R.raw.bain_cleanercosts;
+                bainPhraseString = "Don't kill civilians.";
+                break;
+            case 5:
+                resources = R.raw.bain_flashlight;
+                bainPhraseString = "Stay out of the flashlights people.";
+                break;
+            case 6:
+                resources = R.raw.bain_go;
+                bainPhraseString = "Come on guys go!";
+                break;
+            case 7:
+                resources = R.raw.bain_guys;
+                bainPhraseString = "Thats my guys.";
+                break;
+            case 8:
+                resources = R.raw.bain_here_we_go;
+                bainPhraseString = "Here we go.";
+                break;
+            case 9:
+                resources = R.raw.bain_hostage;
+                bainPhraseString = "Alright, let the hostage go and the trade is done.";
+                break;
+            case 10:
+                resources = R.raw.bain_hostage2;
+                bainPhraseString = "a hostage.";
+                break;
+            case 11:
+                resources = R.raw.bain_let_the_hostage_go;
+                bainPhraseString = "Let the hostage go and the trade is done.";
+                break;
+            case 12:
+                resources = R.raw.bain_loot;
+                bainPhraseString = "Don't let them take your loot.";
+                break;
+            case 13:
+                resources = R.raw.bain_sniper;
+                bainPhraseString = "Sniper rooftop.";
+                break;
+            case 14:
+                resources = R.raw.bain_yes;
+                bainPhraseString = "YES.";
+                break;
+            case 15:
+                resources = R.raw.bain_two;
+                bainPhraseString = "That's two one more to go.";
+                break;
+            case 16:
+                resources = R.raw.bain_escape;
+                bainPhraseString = "Vans here, say it again the escape vans here.";
+                break;
+            case 17:
+                resources = R.raw.bain_needcivilians;
+                bainPhraseString = "Remember guys we need ____ civilians.";
+                break;
+            case 18:
+                resources = R.raw.bain_civilians;
+                bainPhraseString = "Civilians.";
+                break;
+            default:
+                resources = R.raw.bain_civilians;
+                bainPhraseString = "Civilians.";
+                break;
+        }
+
         buttonId = v.getId();
-        listId = threadList.size();
         setButtonPlaying(true, buttonId);
         Log.d("Button pressed", String.valueOf(v.getId()));
+
+        /*
         switch (v.getId()){
             case R.id.buttonBain1:
                 resources = R.raw.bain_alarm;
@@ -142,56 +228,39 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                 resources = R.raw.bain_civilians;
                 bainPhraseString = "Civilians.";
                 break;
-            /*
-            case R.id.buttonBain19:
-                resources = R.raw.bain_doit;
-                break;
-            case R.id.buttonBain20:
-                resources = R.raw.bain_cleanercosts; //TODO: vaihda tämä ääni
-            case R.id.buttonBain21:
-                resources = R.raw.bain_cleanercosts; //TODO: sama */
+
             default:
                 resources = R.raw.bain_cleanercosts;
+                bainPhraseString = "Don't kill civilians. (DEFAULT)";
         }
+        */
 
         bainPhraseTextView.setText(bainPhraseString);
 
-        if(bainSoundPlayerThread == null)
-        {
-            bainSoundPlayerThread = new BainSoundPlayerThread(this, resources, this, buttonId, listId);
-            bainSoundPlayerThread.setRunning(true);
-            bainSoundPlayerThread.start();
-            threadList.add(bainSoundPlayerThread);
+            if(bainSoundPlayerThread == null)
+            {
+                bainSoundPlayerThread = new BainSoundPlayerThread(this, resources, this, buttonId, listId);
+                bainSoundPlayerThread.setRunning(true);
+                bainSoundPlayerThread.start();
+                Log.d("Starting thread", "bainSPThread");
+            }
 
-            Log.d("Added to threadlist", String.valueOf(threadList.size()));
-            Log.d("Starting thread", "bainSPThread");
-        }
-
-        else
-        {
-            bainSoundPlayerThread.setRunning(false);
-            bainSoundPlayerThread.interrupt();
-            bainSoundPlayerThread = new BainSoundPlayerThread(this, resources, this, buttonId, listId);
-            bainSoundPlayerThread.start();
-            threadList.add(bainSoundPlayerThread);
-            Log.d("Added to threadlist", String.valueOf(threadList.size()));
+            else
+            {
+                bainSoundPlayerThread.setRunning(false);
+                bainSoundPlayerThread.interrupt();
+                bainSoundPlayerThread = new BainSoundPlayerThread(this, resources, this, buttonId, listId);
+                bainSoundPlayerThread.start();
+            }
         }
 
     }
 
     public void onAboutButtonClicked(View v)
     {
-
         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         cdd.getWindow().setWindowAnimations(R.style.dialog_animation_fade);
         cdd.show();
-    }
-
-    public void removeFromList(int id)
-    {
-        Log.d("RMV list", String.valueOf(id));
-
-            //threadList.remove(id);
     }
 
     public void setButtonPlaying(final boolean isButtonPlaying, final int btnId)
@@ -207,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                     button = (Button) findViewById(btnId);
                         if(isButtonPlaying)
                         {
+                            isThreadPlaying = true;
                             //button.setBackground(playingOn);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 icon = getResources().getDrawable(R.drawable.play_icon);
@@ -215,9 +285,9 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                         }
                         else
                         {
-                            button.setBackground(playingOff);
                             //button.setForeground();
 
+                            isThreadPlaying = false;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 button.setForeground(null);
                                 bainPhraseTextView.setText("");

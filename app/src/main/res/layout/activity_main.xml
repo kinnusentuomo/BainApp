@@ -20,186 +20,24 @@ android:background="@mipmap/background_image"
     </TableRow>
 </TableLayout>
 
-    <TableLayout>
+    <TableLayout
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp">
             <TextView
-                android:background="@drawable/textview_bain_phrase_background_drawable"
-                android:layout_marginBottom="12sp"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="25sp"
-                android:id="@+id/bainPhraseTextView"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit ="marquee_forever"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:scrollHorizontally="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true" />
+                style="@style/TextViewStyle"
+                android:id="@+id/bainPhraseTextView" />
     </TableLayout>
 
-    <TableLayout>
-    <TableRow
-        android:layout_weight="0"
-        android:gravity="center_horizontal">
-        <Button
-            android:text="1"
-            android:layout_column="1"
-            android:id="@+id/buttonBain1"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="2"
-            android:layout_column="2"
-            android:id="@+id/buttonBain2"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="3"
-            android:layout_column="3"
-            android:id="@+id/buttonBain3"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-    </TableRow>
-
-
-    <TableRow
-    android:layout_weight="0"
-    android:gravity="center">
-        <Button
-            android:text="4"
-            android:layout_column="1"
-            android:id="@+id/buttonBain4"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-    <Button
-        android:text="5"
-        android:layout_column="2"
-        android:id="@+id/buttonBain5"
-        style="@style/ButtonStyle"
-        android:onClick="onBainButtonClicked" />
-
-    <Button
-        android:text="6"
-        android:layout_column="3"
-            android:id="@+id/buttonBain6"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-</TableRow>
-
-
-
-<TableRow
-    android:layout_weight="0"
-    android:gravity="center">
-        <Button
-            android:text="7"
-            android:layout_column="1"
-            android:id="@+id/buttonBain9"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="8"
-            android:layout_column="2"
-            android:id="@+id/buttonBain8"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-    <Button
-        android:text="9"
-        android:layout_column="3"
-        android:id="@+id/buttonBain7"
-        style="@style/ButtonStyle"
-        android:onClick="onBainButtonClicked" />
-</TableRow>
-
-
-<TableRow
-    android:layout_weight="0"
-    android:gravity="center">
-        <Button
-            android:text="10"
-            android:layout_column="1"
-            android:id="@+id/buttonBain10"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="11"
-            android:layout_column="2"
-            android:id="@+id/buttonBain11"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="12"
-            android:layout_column="3"
-            android:id="@+id/buttonBain12"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-</TableRow>
-
-
-<TableRow
-    android:layout_weight="0"
-    android:gravity="center">
-        <Button
-            android:text="13"
-            android:layout_column="1"
-            android:id="@+id/buttonBain13"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="14"
-            android:layout_column="2"
-            android:id="@+id/buttonBain14"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-
-        <Button
-            android:text="15"
-            android:layout_column="3"
-            android:id="@+id/buttonBain15"
-            style="@style/ButtonStyle"
-            android:onClick="onBainButtonClicked" />
-</TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:gravity="center">
-
-        <Button
-                android:id="@+id/buttonBain16"
-                style="@style/ButtonStyle"
-                android:layout_column="1"
-                android:onClick="onBainButtonClicked"
-                android:text="16" />
-
-            <Button
-                android:id="@+id/buttonBain17"
-                style="@style/ButtonStyle"
-                android:layout_column="2"
-                android:onClick="onBainButtonClicked"
-                android:text="17" />
-
-            <Button
-                android:id="@+id/buttonBain18"
-                style="@style/ButtonStyle"
-                android:layout_column="3"
-                android:text="18"
-                android:onClick="onBainButtonClicked" />
-    </TableRow>
+    <TableLayout
+        android:layout_marginBottom="45sp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp">
+        <ListView
+            android:gravity="center"
+            android:background="@drawable/dialog_background_drawable"
+            android:id="@+id/buttonListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
     </TableLayout>
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_weight=".5"
-        />
 </TableLayout>
