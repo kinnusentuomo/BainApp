@@ -7,24 +7,41 @@ tools:context="tuomomees.bain_soundboard_app.MainActivity"
 android:background="@mipmap/background_image"
 >
 
-<TableRow
-    android:layout_weight="0"
-    android:gravity="end"
-    >
-    <Button
-        android:layout_margin="25sp"
-        android:id="@+id/buttonAbout"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
-        android:layout_column="4"
-        android:background="@android:drawable/ic_dialog_info"
-        android:onClick="onAboutButtonClicked" />
-</TableRow>
+<TableLayout>
+    <TableRow
+        android:gravity="end">
+        <Button
+            android:layout_margin="30sp"
+            android:id="@+id/buttonAbout"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:background="@android:drawable/ic_dialog_info"
+            android:onClick="onAboutButtonClicked" />
+    </TableRow>
+</TableLayout>
 
+    <TableLayout>
+            <TextView
+                android:background="@drawable/textview_bain_phrase_background_drawable"
+                android:layout_marginBottom="12sp"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:id="@+id/bainPhraseTextView"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
+    </TableLayout>
+
+    <TableLayout>
     <TableRow
         android:layout_weight="0"
         android:gravity="center_horizontal">
-
         <Button
             android:text="1"
             android:layout_column="1"
@@ -179,6 +196,7 @@ android:background="@mipmap/background_image"
                 android:text="18"
                 android:onClick="onBainButtonClicked" />
     </TableRow>
+    </TableLayout>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
