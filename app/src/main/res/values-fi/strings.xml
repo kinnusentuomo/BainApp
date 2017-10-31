@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Bain SoundBoard App beta</string>
     <string name="about_text">Sovelluksen on tehnyt Tuomo Kinnunen 2017. \nSovellus on täysin mainosvapaa. Mainokset tarjoavat todella pienen rahantulon, jonka vuoksi ne eivät ole päiväsi pilaamisen arvoisia. Jos sinulla jäi jotain mielen päälle, käytäthän palaute -nappulaa.</string>
-    <string name="app_label_text">Bain Soundboard App v1.0 beta</string>
+    <string name="app_label_text">Bain Soundboard App</string>
     <string name="choose_feedback_delivering">Lähetän palautetta seuraavan sovelluksen avulla...</string>
     <string name="closebutton_text">Peruuta</string>
     <string name="donatebutton_text">Lahjoita</string>

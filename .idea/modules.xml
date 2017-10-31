@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bain_SoundBoard_App.iml" filepath="$PROJECT_DIR$/Bain_SoundBoard_App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BainApp.iml" filepath="$PROJECT_DIR$/BainApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -3,6 +3,7 @@ package tuomomees.bain_soundboard_app;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -45,7 +46,14 @@ class CustomDialogClass extends Dialog implements
             case R.id.btn_yes:
                 Toast.makeText(c.getApplicationContext(),c.getResources().getString(R.string.support_text), Toast.LENGTH_LONG).show();
 
-                String subject = c.getResources().getString(R.string.app_label_text);
+                String subject = null;
+                try {
+                    subject = c.getResources().getString(R.string.app_label_text) + c.getPackageManager()
+                            .getPackageInfo(c.getPackageName(), 0).versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                ;
                 String emailAddress = c.getResources().getString(R.string.feedback_address);
                 String templateBody = c.getResources().getString(R.string.feedback_template);
                 String whichEmailToUse =  c.getResources().getString(R.string.choose_feedback_delivering);
