@@ -6,7 +6,7 @@
     <string name="feedbackbutton_text">Feedback</string>
     <string name="support_text">Thank you for your support!</string>
     <string name="notsupport_text">Maybe you should support next time.</string>
-    <string name="app_label_text">Bain Soundboard App v1.0 beta</string>
+    <string name="app_label_text">Bain Soundboard App</string>
     <string name="feedback_address">feedback.tuomomees.applab@gmail.com</string>
     <string name="feedback_template">I loved ____ in this app but _____ could be better.\n</string>
     <string name="choose_feedback_delivering">I am going to send feedback with...</string>

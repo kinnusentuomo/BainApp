@@ -8,7 +8,6 @@ package tuomomees.bain_soundboard_app;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 class CustomListViewAdapter extends ArrayAdapter<String> {
     private int groupid;
     private String[] item_list;
     private Context context;
-    private int buttonCounter = 1;
+    private int buttonCounter = 0;
+
+
+    ViewHolder holder;
+
+    int counter = 0;
 
     //VG = layout ID
-    CustomListViewAdapter(Context context, int vg, int id, String[] item_list){
-        super(context,vg, id, item_list);
+    CustomListViewAdapter(Context context, int vg, /*int id, */String[] item_list){
+        super(context,vg, /*id,*/ item_list);
         this.context=context;
         groupid=vg;
         this.item_list=item_list;
@@ -46,30 +48,25 @@ class CustomListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView= inflater.inflate(groupid, parent, false);
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.textview = (TextView) rowView.findViewById(R.id.textViewInList);
-            //buttonCounter = buttonCounter +1;
             viewHolder.button1 = (Button) rowView.findViewById(R.id.button1);
-            viewHolder.button1.setId(buttonCounter);
-            viewHolder.button1.setText(String.valueOf(buttonCounter));
-            buttonCounter = buttonCounter +1;
             viewHolder.button2 = (Button) rowView.findViewById(R.id.button2);
-            viewHolder.button2.setId(buttonCounter);
-            viewHolder.button2.setText(String.valueOf(buttonCounter));
-            buttonCounter = buttonCounter +1;
             viewHolder.button3 = (Button) rowView.findViewById(R.id.button3);
-            viewHolder.button3.setId(buttonCounter);
-            viewHolder.button3.setText(String.valueOf(buttonCounter));
-            buttonCounter = buttonCounter +1;
             rowView.setTag(viewHolder);
         }
-        // Set text to each TextView of ListView item
-        ViewHolder holder = (ViewHolder) rowView.getTag();
-        holder.textview.setText(item_list[position]);
-        /*
-        holder.button1.setText(String.valueOf(buttonCounter));
-        holder.button2.setText(String.valueOf(buttonCounter));
-        holder.button3.setText(String.valueOf(buttonCounter));
-*/
+
+            // Set text to each TextView of ListView item
+            holder = (ViewHolder) rowView.getTag();
+            buttonCounter = buttonCounter + 1;
+            holder.button1.setText(String.valueOf(buttonCounter));
+            holder.button1.setId(position);
+            buttonCounter = buttonCounter + 1;
+            holder.button2.setText(String.valueOf(position));
+            holder.button2.setId(position);
+            buttonCounter = buttonCounter + 1;
+            holder.button3.setText(String.valueOf(position));
+            holder.button3.setId(position);
+            buttonCounter = buttonCounter + 1;
+
         return rowView;
     }
 }

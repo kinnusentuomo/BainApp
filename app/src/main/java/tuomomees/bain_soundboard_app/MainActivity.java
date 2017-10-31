@@ -17,7 +17,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements BainSoundPlayerThread.MediaPlayerThreadInterface{
+
+
+    //Testi
+    ArrayList<RowItemModel> models = new ArrayList<RowItemModel>();
+    TestAdapter testAdapter;
+    //END
 
     BainSoundPlayerThread bainSoundPlayerThread = null;
     int resources; //Toistettava tiedosto
@@ -42,11 +50,18 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         bainPhraseTextView = (TextView) findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
 
+
+        initializeTestiAdapter();
+
+
+
         //LISTVIEW TESTI
         listView = (ListView) findViewById(R.id.buttonListView);
-        String[] items={"1","2","3","4","5", "6", "7", "8"}; //ROW AMOUNT
-        customListViewAdapterdapter = new CustomListViewAdapter(this, R.layout.listview_item ,R.id.textViewInList, items);
-        listView.setAdapter(customListViewAdapterdapter);
+        String[] items = new String[10]; //ROW AMOUNT
+
+        customListViewAdapterdapter = new CustomListViewAdapter(this, R.layout.listview_item ,/*R.id.textViewInList,*/ items);
+        //listView.setAdapter(customListViewAdapterdapter);
+        listView.setAdapter(testAdapter);
         //END
 
         cdd=new CustomDialogClass(this);
@@ -69,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         int id = bt.getId();
         switch (id)
         {
+            case 0:
+                resources = R.raw.bain_civilians;
+                bainPhraseString = "Civilians.";
+                break;
             case 1:
                 resources = R.raw.bain_alarm;
                 bainPhraseString = "That's the alarm, time to do some heavy lifting.";
@@ -169,7 +188,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                 bainSoundPlayerThread.start();
             }
         }
-
     }
 
     public void onAboutButtonClicked(View v)
@@ -203,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                         else
                         {
                             //button.setForeground();
-
                             isThreadPlaying = false;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 button.setForeground(null);
@@ -215,5 +232,22 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                 }
             }
         });
+    }
+
+    //TESTI
+    public ArrayList<RowItemModel> generateData(){
+
+        models.add(new RowItemModel(1, 2, 3));
+        models.add(new RowItemModel(4, 5, 6));
+        models.add(new RowItemModel(7, 8, 9));
+        models.add(new RowItemModel(10, 11, 12));
+        models.add(new RowItemModel(13, 14, 15));
+        models.add(new RowItemModel(16, 17, 18));
+        return models;
+    }
+
+    public void initializeTestiAdapter()
+    {
+        testAdapter = new TestAdapter(this, generateData());
     }
 }

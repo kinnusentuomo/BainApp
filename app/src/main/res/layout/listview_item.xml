@@ -7,13 +7,6 @@
     >
 
     <TableRow>
-        <TextView
-            android:textColor="@color/colorWhite"
-            android:textSize="25sp"
-            android:id="@+id/textViewInList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
         <Button
             style="@style/ButtonStyle"
             android:onClick="onBainButtonClicked"
