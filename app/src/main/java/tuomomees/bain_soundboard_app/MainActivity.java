@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBainButtonClicked(View v)
     {
         if(!isThreadPlaying)
