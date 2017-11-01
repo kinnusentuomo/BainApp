@@ -17,12 +17,9 @@ import android.widget.TextView;
 
 class CustomListViewAdapter extends ArrayAdapter<String> {
     private int groupid;
-    private String[] item_list;
+    //private String[] item_list;
     private Context context;
     private int buttonCounter = 0;
-
-
-    ViewHolder holder;
 
     int counter = 0;
 
@@ -31,7 +28,7 @@ class CustomListViewAdapter extends ArrayAdapter<String> {
         super(context,vg, /*id,*/ item_list);
         this.context=context;
         groupid=vg;
-        this.item_list=item_list;
+        //this.item_list=item_list;
     }
     // Hold views of the ListView to improve its scrolling performance
     private static class ViewHolder {
@@ -39,13 +36,14 @@ class CustomListViewAdapter extends ArrayAdapter<String> {
         Button button1, button2, button3;
     }
 
-    @NonNull
+    @NonNull //BUG FIX
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         View rowView = convertView;
         // Inflate the list_item.xml file if convertView is null
         if(rowView==null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            assert inflater != null;
             rowView= inflater.inflate(groupid, parent, false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.button1 = (Button) rowView.findViewById(R.id.button1);
@@ -55,7 +53,7 @@ class CustomListViewAdapter extends ArrayAdapter<String> {
         }
 
             // Set text to each TextView of ListView item
-            holder = (ViewHolder) rowView.getTag();
+        ViewHolder holder = (ViewHolder) rowView.getTag();
             buttonCounter = buttonCounter + 1;
             holder.button1.setText(String.valueOf(buttonCounter));
             holder.button1.setId(position);
