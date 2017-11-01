@@ -1,11 +1,8 @@
 package tuomomees.bain_soundboard_app;
 
-/**
- * Luokan on luonut tuomo päivämäärällä 29.10.2017.
- */
-
 //LISTVIEWIÄ VARTEN LUOTU ADAPTERI
 
+        import android.annotation.SuppressLint;
         import android.content.Context;
         import android.graphics.drawable.Drawable;
         import android.support.annotation.NonNull;
@@ -25,13 +22,12 @@ public class ButtonListViewAdapter extends ArrayAdapter<RowItemModel> {
     private final ArrayList<RowItemModel> modelsArrayList;
 
     ButtonListViewAdapter(Context context, ArrayList<RowItemModel> modelsArrayList) {
-
         super(context, R.layout.listview_item, modelsArrayList);
-
         this.context = context;
         this.modelsArrayList = modelsArrayList;
     }
 
+    @SuppressLint("ViewHolder")
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
@@ -41,9 +37,9 @@ public class ButtonListViewAdapter extends ArrayAdapter<RowItemModel> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // 2. Get rowView from inflater
-
         View rowView;
 
+        assert inflater != null;
         rowView = inflater.inflate(R.layout.listview_item, parent, false);
 
         // 3. Get icon,title & counter views from the rowView

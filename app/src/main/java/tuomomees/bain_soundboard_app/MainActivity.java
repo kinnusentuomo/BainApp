@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -219,17 +217,8 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
     public void onAboutButtonClicked(View v)
     {
-
-        try
-        {
-            cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        }
-        catch (NullPointerException e)
-        {
-            e.printStackTrace();
-        }
-
-        cdd.getWindow().setWindowAnimations(R.style.dialog_animation_fade);
+        //cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //cdd.getWindow().setWindowAnimations(R.style.dialog_animation_fade);
         cdd.show();
     }
 
@@ -267,18 +256,10 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                                 button.setForeground(null);
                                 boolean isEllipsize = !((bainPhraseTextView.getLayout().getText().toString()).equalsIgnoreCase(bainPhraseString));
 
-
-
                                 if(isEllipsize)
                                 {
                                     bainPhraseTextView.setText("");
                                 }
-                                else
-                                {
-
-                                }
-
-
                             }
                         }
 
