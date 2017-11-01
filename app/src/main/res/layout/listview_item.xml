@@ -6,7 +6,8 @@
     android:layout_gravity="center_horizontal"
     >
 
-    <TableRow>
+    <TableRow
+        android:background="@drawable/dialog_background_drawable">
         <Button
             style="@style/ButtonStyle"
             android:onClick="onBainButtonClicked"

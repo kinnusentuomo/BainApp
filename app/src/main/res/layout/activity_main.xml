@@ -24,6 +24,7 @@ android:background="@mipmap/background_image"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp">
             <TextView
+                android:maxLines="1"
                 style="@style/TextViewStyle"
                 android:id="@+id/bainPhraseTextView" />
     </TableLayout>

@@ -46,7 +46,7 @@
 
         <Button
             android:background="@drawable/button_background_drawable"
-            android:id="@+id/btn_yes"
+            android:id="@+id/btn_feedback"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:clickable="true"
@@ -56,7 +56,7 @@
 
         <Button
             android:background="@drawable/button_background_drawable"
-            android:id="@+id/btn_no"
+            android:id="@+id/btn_close"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_marginLeft="5dp"

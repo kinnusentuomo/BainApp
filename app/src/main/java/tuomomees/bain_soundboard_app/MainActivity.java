@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -22,10 +24,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements BainSoundPlayerThread.MediaPlayerThreadInterface{
 
 
-    //Testi
-    ArrayList<RowItemModel> models = new ArrayList<RowItemModel>();
-    TestAdapter testAdapter;
-    //END
+    //Painikeriveistä muodostuva lista
+    ArrayList<RowItemModel> models = new ArrayList<>();
+    ButtonListViewAdapter buttonListViewAdapter; //Adapteri
 
     BainSoundPlayerThread bainSoundPlayerThread = null;
     int resources; //Toistettava tiedosto
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
     Button button;
     TextView bainPhraseTextView;
     ListView listView;
-    CustomListViewAdapter customListViewAdapterdapter;
     CustomDialogClass cdd;
 
     String bainPhraseString;
@@ -50,20 +50,11 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         bainPhraseTextView = (TextView) findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
 
+        buttonListViewAdapter = new ButtonListViewAdapter(this, generateData());
 
-        initializeTestiAdapter();
-
-
-
-        //LISTVIEW TESTI
+        //Alustetaan listview käyttöön
         listView = (ListView) findViewById(R.id.buttonListView);
-        String[] items = new String[10]; //ROW AMOUNT
-
-        customListViewAdapterdapter = new CustomListViewAdapter(this, R.layout.listview_item ,/*R.id.textViewInList,*/ items);
-        //listView.setAdapter(customListViewAdapterdapter);
-        listView.setAdapter(testAdapter);
-        //END
-
+        listView.setAdapter(buttonListViewAdapter);
         cdd=new CustomDialogClass(this);
 
         //Asettaa äänensäännön applikaatioista tulevaan ääneen, eikä hälytysääneen
@@ -160,6 +151,42 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                 resources = R.raw.bain_civilians;
                 bainPhraseString = "Civilians.";
                 break;
+            case 19:
+                resources = R.raw.bain_you_guys_are_killing_it_there_snipers_are_brought_in_people;
+                bainPhraseString = "You guys are killing it in there, snipers are brought in people.";
+                break;
+            case 20:
+                resources = R.raw.bain_we_are_trying_our_luck_out_here;
+                bainPhraseString = "We are trying our luck out here";
+                break;
+            case 21:
+                resources = R.raw.bain_two_minutes;
+                bainPhraseString = "Two minutes!";
+                break;
+            case 22:
+                resources = R.raw.bain_they_dont_want_to_this_be_over_sniper_are_in_the_surrounding_buildings;
+                bainPhraseString = "They dont want to this to be over, sniper are in the surrounding_buildings";
+                break;
+            case 23:
+                resources = R.raw.bain_they_brought_in_snipers;
+                bainPhraseString = "They brought in snipers.";
+                break;
+            case 24:
+                resources = R.raw.bain_they_are_coming;
+                bainPhraseString = "They are coming.";
+                break;
+            case 25:
+                resources = R.raw.bain_police_heli_coming_in;
+                bainPhraseString = "Police  heli coming in.";
+                break;
+            case 26:
+                resources = R.raw.bain_get_the_bag_on_the_van_guys;
+                bainPhraseString = "Get the bag on the van guys.";
+                break;
+            case 27:
+                resources = R.raw.bain_come_on_come_on_only_couple_of_seconds_left_guys_police_are_on_their_way;
+                bainPhraseString = "Come on come on only couple of seconds left guys police are on their way";
+                break;
             default:
                 resources = R.raw.bain_civilians;
                 bainPhraseString = "Civilians.";
@@ -192,7 +219,16 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
     public void onAboutButtonClicked(View v)
     {
-        cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        try
+        {
+            cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
         cdd.getWindow().setWindowAnimations(R.style.dialog_animation_fade);
         cdd.show();
     }
@@ -204,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
             @Override
             public void run() {
                 boolean running = true;
-                Drawable icon;
+                Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
                 while(running)
                 {
                     button = (Button) findViewById(btnId);
@@ -214,17 +250,35 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                             //button.setBackground(playingOn);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 //icon = getResources().getDrawable(R.drawable.play_icon); //Vanhentunut metodi
-                                icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
-                                button.setForeground(icon);
+                                if(icon != null) //BUG FIX
+                                {
+                                    button.setForeground(icon);
+                                }
+                                else {
+                                    icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
+                                    button.setForeground(icon);
+                                }
                             }
                         }
                         else
                         {
-                            //button.setForeground();
                             isThreadPlaying = false;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 button.setForeground(null);
-                                bainPhraseTextView.setText("");
+                                boolean isEllipsize = !((bainPhraseTextView.getLayout().getText().toString()).equalsIgnoreCase(bainPhraseString));
+
+
+
+                                if(isEllipsize)
+                                {
+                                    bainPhraseTextView.setText("");
+                                }
+                                else
+                                {
+
+                                }
+
+
                             }
                         }
 
@@ -234,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         });
     }
 
-    //TESTI
+    //Metodi, jolla lisätään tarvittavat rivit listaan
     public ArrayList<RowItemModel> generateData(){
 
         models.add(new RowItemModel(1, 2, 3));
@@ -243,11 +297,8 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         models.add(new RowItemModel(10, 11, 12));
         models.add(new RowItemModel(13, 14, 15));
         models.add(new RowItemModel(16, 17, 18));
+        models.add(new RowItemModel(19, 20, 21));
+        models.add(new RowItemModel(22, 23, 24));
         return models;
-    }
-
-    public void initializeTestiAdapter()
-    {
-        testAdapter = new TestAdapter(this, generateData());
     }
 }

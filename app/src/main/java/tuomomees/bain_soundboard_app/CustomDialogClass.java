@@ -20,12 +20,10 @@ class CustomDialogClass extends Dialog implements
         android.view.View.OnClickListener {
 
     private Activity c;
-    public Dialog d;
-    private Button yes, no;
+    private Button feedback, close;
 
     CustomDialogClass(Activity a) {
         super(a);
-        // TODO Auto-generated constructor stub
         this.c = a;
     }
 
@@ -34,16 +32,16 @@ class CustomDialogClass extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-        yes = (Button) findViewById(R.id.btn_yes);
-        no = (Button) findViewById(R.id.btn_no);
-        yes.setOnClickListener(this);
-        no.setOnClickListener(this);
+        feedback = (Button) findViewById(R.id.btn_feedback);
+        close = (Button) findViewById(R.id.btn_close);
+        feedback.setOnClickListener(this);
+        close.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_yes:
+            case R.id.btn_feedback:
                 Toast.makeText(c.getApplicationContext(),c.getResources().getString(R.string.support_text), Toast.LENGTH_LONG).show();
 
                 String subject = null;
@@ -53,7 +51,6 @@ class CustomDialogClass extends Dialog implements
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
                 }
-                ;
                 String emailAddress = c.getResources().getString(R.string.feedback_address);
                 String templateBody = c.getResources().getString(R.string.feedback_template);
                 String whichEmailToUse =  c.getResources().getString(R.string.choose_feedback_delivering);
@@ -65,7 +62,7 @@ class CustomDialogClass extends Dialog implements
                 c.startActivity(Intent.createChooser(emailIntent, whichEmailToUse));
 
                 break;
-            case R.id.btn_no:
+            case R.id.btn_close:
                 //Toast.makeText(c.getApplicationContext(), c.getResources().getString(R.string.notsupport_text), Toast.LENGTH_LONG).show();
                 break;
             default:
