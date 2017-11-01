@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background_drawable"
@@ -22,7 +24,7 @@
         android:background="@drawable/tuomomees_app_lab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txt_dia"
@@ -52,7 +54,8 @@
             android:clickable="true"
             android:text="@string/feedbackbutton_text"
             android:textColor="#5DBCD2"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:focusable="true" />
 
         <Button
             android:background="@drawable/button_background_drawable"
@@ -63,6 +66,8 @@
             android:clickable="true"
             android:text="@string/closebutton_text"
             android:textColor="#5DBCD2"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:focusable="true"
+            android:layout_marginStart="5dp" />
     </LinearLayout>
 </LinearLayout>

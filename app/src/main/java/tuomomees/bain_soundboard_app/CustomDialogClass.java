@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 /**
- * Created by tuomo on 10.10.2017.
+ * Luokan on luonut tuomo päivämäärällä 10.10.2017.
  */
 
 
@@ -20,7 +22,6 @@ class CustomDialogClass extends Dialog implements
         android.view.View.OnClickListener {
 
     private Activity c;
-    private Button feedback, close;
 
     CustomDialogClass(Activity a) {
         super(a);
@@ -32,10 +33,21 @@ class CustomDialogClass extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-        feedback = (Button) findViewById(R.id.btn_feedback);
-        close = (Button) findViewById(R.id.btn_close);
+        Button feedback = (Button) findViewById(R.id.btn_feedback);
+        Button close = (Button) findViewById(R.id.btn_close);
         feedback.setOnClickListener(this);
         close.setOnClickListener(this);
+
+        try
+        {
+            getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getWindow().setWindowAnimations(R.style.dialog_animation_fade);
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

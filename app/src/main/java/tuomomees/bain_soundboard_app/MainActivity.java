@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void onBainButtonClicked(View v)
     {
-
         if(!isThreadPlaying)
         {
         Button bt=(Button)v;
@@ -194,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         buttonId = v.getId();
         setButtonPlaying(true, buttonId);
         Log.d("Button pressed", String.valueOf(v.getId()));
-
         bainPhraseTextView.setText(bainPhraseString);
 
             if(bainSoundPlayerThread == null)
@@ -217,15 +215,13 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
     public void onAboutButtonClicked(View v)
     {
-        //cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //cdd.getWindow().setWindowAnimations(R.style.dialog_animation_fade);
+
         cdd.show();
     }
 
     public void setButtonPlaying(final boolean isButtonPlaying, final int btnId)
     {
         this.runOnUiThread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void run() {
                 boolean running = true;
@@ -236,33 +232,36 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                         if(isButtonPlaying)
                         {
                             isThreadPlaying = true;
-                            //button.setBackground(playingOn);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                 //icon = getResources().getDrawable(R.drawable.play_icon); //Vanhentunut metodi
-                                if(icon != null) //BUG FIX
+                                try
                                 {
-                                    button.setForeground(icon);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        button.setForeground(icon);
+                                    }
                                 }
-                                else {
-                                    icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
-                                    button.setForeground(icon);
+                                catch (NullPointerException e)
+                                {
+                                    e.printStackTrace();
                                 }
-                            }
+
                         }
                         else
                         {
                             isThreadPlaying = false;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                button.setForeground(null);
-                                boolean isEllipsize = !((bainPhraseTextView.getLayout().getText().toString()).equalsIgnoreCase(bainPhraseString));
-
-                                if(isEllipsize)
+                                try
                                 {
-                                    bainPhraseTextView.setText("");
+                                    button.setForeground(new ColorDrawable(Color.TRANSPARENT));
                                 }
+                                catch (NullPointerException e)
+                                {
+                                    e.printStackTrace();
+                                }
+
+                                bainPhraseTextView.setText("");
+                                boolean isEllipsize = !((bainPhraseTextView.getLayout().getText().toString()).equalsIgnoreCase(bainPhraseString));
                             }
                         }
-
                     running = false;
                 }
             }
@@ -280,6 +279,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         models.add(new RowItemModel(16, 17, 18));
         models.add(new RowItemModel(19, 20, 21));
         models.add(new RowItemModel(22, 23, 24));
+        models.add(new RowItemModel(25,26,27));
         return models;
     }
 }
