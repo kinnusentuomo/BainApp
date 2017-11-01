@@ -26,13 +26,13 @@ public class RowItemModel {
         this.buttonNumber = buttonNumber;
     }
 
-    public int getButtonId1() {
+    int getButtonId1() {
         return buttonId1;
     }
-    public int getButtonId2() {
+    int getButtonId2() {
         return buttonId2;
     }
-    public int getButtonId3() {
+    int getButtonId3() {
         return buttonId3;
     }
 

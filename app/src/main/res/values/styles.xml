@@ -23,7 +23,7 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">25sp</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:marqueeRepeatLimit">1</item>
         <item name="android:focusable">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:scrollHorizontally">true</item>
