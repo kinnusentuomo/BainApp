@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
         cdd.show();
     }
-//
+
     public void setButtonPlaying(final boolean isButtonPlaying, final int btnId)
     {
         this.runOnUiThread(new Runnable() {
