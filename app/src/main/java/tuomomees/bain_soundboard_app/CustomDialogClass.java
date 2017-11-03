@@ -17,7 +17,6 @@ import android.widget.Toast;
  * Luokan on luonut tuomo päivämäärällä 10.10.2017.
  */
 
-
 class CustomDialogClass extends Dialog implements
         android.view.View.OnClickListener {
 
@@ -33,8 +32,8 @@ class CustomDialogClass extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-        Button feedback = (Button) findViewById(R.id.btn_feedback);
-        Button close = (Button) findViewById(R.id.btn_close);
+        Button feedback = findViewById(R.id.btn_feedback);
+        Button close = findViewById(R.id.btn_close);
         feedback.setOnClickListener(this);
         close.setOnClickListener(this);
 
@@ -47,7 +46,6 @@ class CustomDialogClass extends Dialog implements
         {
             e.printStackTrace();
         }
-
     }
 
     @Override

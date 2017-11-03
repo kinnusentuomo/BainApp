@@ -1,6 +1,5 @@
 package tuomomees.bain_soundboard_app;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,7 +16,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -42,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
     Boolean isThreadPlaying = false;
     ArrayList<Integer> audioList;
+    int cellAmount = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
         bainPhraseTextView = findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
+
+
 
         buttonListViewAdapter = new ButtonListViewAdapter(this, generateData());
 
@@ -67,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
-
 
     public void checkRawResources()
     {
@@ -187,23 +187,47 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
     //Metodi, jolla lisätään tarvittavat rivit listaan
     public ArrayList<RowItemModel> generateData(){
 
-        models.add(new RowItemModel(1, 2, 3));
-        models.add(new RowItemModel(4, 5, 6));
-        models.add(new RowItemModel(7, 8, 9));
-        models.add(new RowItemModel(10, 11, 12));
-        models.add(new RowItemModel(13, 14, 15));
-        models.add(new RowItemModel(16, 17, 18));
-        models.add(new RowItemModel(19, 20, 21));
-        models.add(new RowItemModel(22, 23, 24));
-        models.add(new RowItemModel(25,26,27));
 
-        models.add(new RowItemModel(28,29,30));
-        models.add(new RowItemModel(31,32,33));
-        models.add(new RowItemModel(34,35,36));
-        models.add(new RowItemModel(37,38,39));
-        models.add(new RowItemModel(40,41,42));
-        models.add(new RowItemModel(43,44,45));
+        //rowAmount = montako riviä painikkeita on
+        //cellAmount = montako painiketta on yhdessä rivissä
+        //buttonAmount = rowAmount * cellAmount kokonaispainikkeiden määrä
 
+        int rowAmount = audioList.size() / cellAmount;
+
+        ArrayList<Integer> array = new ArrayList<>();
+        array.add(1);
+        int limiter;
+        int id1 = 0, id2 = 0, id3 = 0;
+
+        //i = rowAmount : j = cellAmount
+        for(int i = 1; i <= rowAmount; i++){
+            int counter = 0;
+            limiter = array.size() + cellAmount;
+            Log.d("I", String.valueOf(i));
+            for(int j = array.size(); j < limiter; j++){
+
+                Log.d("J", String.valueOf(j));
+                array.add(j);
+                counter = counter + 1;
+
+                Log.d("counter", String.valueOf(counter));
+                switch (counter)
+                {
+                    case 1:
+                        id1 = array.get(j);
+                        break;
+
+                    case 2:
+                        id2 = array.get(j);
+                        break;
+
+                    case 3:
+                        id3 = array.get(j);
+                        break;
+                }
+            }
+            models.add(new RowItemModel(id1, id2, id3));
+        }
         return models;
     }
 }

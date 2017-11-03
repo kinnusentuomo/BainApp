@@ -45,6 +45,7 @@ public class ButtonListViewAdapter extends ArrayAdapter<RowItemModel> {
         Button button2 = rowView.findViewById(R.id.button2);
         Button button3 = rowView.findViewById(R.id.button3);
 
+
         // 4. Set the text for textView
         //imgView.setImageResource(modelsArrayList.get(position).getIcon());
         button1.setId(modelsArrayList.get(position).getButtonId1());
