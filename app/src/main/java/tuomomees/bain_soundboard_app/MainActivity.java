@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         bainPhraseTextView = findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
 
-
-
         buttonListViewAdapter = new ButtonListViewAdapter(this, generateData());
 
         //Alustetaan listview käyttöön
@@ -194,6 +192,9 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
 
         int rowAmount = audioList.size() / cellAmount;
 
+
+        Log.d("Painikelistan koko", rowAmount + "x" + cellAmount);
+
         ArrayList<Integer> array = new ArrayList<>();
         array.add(1);
         int limiter;
@@ -203,14 +204,14 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         for(int i = 1; i <= rowAmount; i++){
             int counter = 0;
             limiter = array.size() + cellAmount;
-            Log.d("I", String.valueOf(i));
+            //Log.d("I", String.valueOf(i));
             for(int j = array.size(); j < limiter; j++){
 
-                Log.d("J", String.valueOf(j));
+                //Log.d("J", String.valueOf(j));
                 array.add(j);
                 counter = counter + 1;
 
-                Log.d("counter", String.valueOf(counter));
+                //Log.d("counter", String.valueOf(counter));
                 switch (counter)
                 {
                     case 1:
