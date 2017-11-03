@@ -5,6 +5,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/tuomomees_app_lab" />
+            android:src="@drawable/tuomomees_app_lab_app_logo" />
     </item>
 </layer-list>

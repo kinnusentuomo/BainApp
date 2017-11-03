@@ -3,18 +3,15 @@ package tuomomees.bain_soundboard_app;
 //LISTVIEWIÄ VARTEN LUOTU ADAPTERI
 
         import android.annotation.SuppressLint;
-        import android.content.Context;
-        import android.graphics.drawable.Drawable;
-        import android.support.annotation.NonNull;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class ButtonListViewAdapter extends ArrayAdapter<RowItemModel> {
 
@@ -44,9 +41,9 @@ public class ButtonListViewAdapter extends ArrayAdapter<RowItemModel> {
 
         // 3. Get icon,title & counter views from the rowView
 
-        Button button1 = (Button) rowView.findViewById(R.id.button1);
-        Button button2 = (Button) rowView.findViewById(R.id.button2);
-        Button button3 = (Button) rowView.findViewById(R.id.button3);
+        Button button1 = rowView.findViewById(R.id.button1);
+        Button button2 = rowView.findViewById(R.id.button2);
+        Button button3 = rowView.findViewById(R.id.button3);
 
         // 4. Set the text for textView
         //imgView.setImageResource(modelsArrayList.get(position).getIcon());

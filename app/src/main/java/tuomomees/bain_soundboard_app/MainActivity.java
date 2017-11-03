@@ -1,5 +1,6 @@
 package tuomomees.bain_soundboard_app;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements BainSoundPlayerThread.MediaPlayerThreadInterface{
@@ -38,19 +41,22 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
     int listId;
 
     Boolean isThreadPlaying = false;
+    ArrayList<Integer> audioList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Hakee kaikki RAW -tiedostot listaan
+        checkRawResources();
 
-        bainPhraseTextView = (TextView) findViewById(R.id.bainPhraseTextView);
+        bainPhraseTextView = findViewById(R.id.bainPhraseTextView);
         bainPhraseTextView.setSelected(true);
 
         buttonListViewAdapter = new ButtonListViewAdapter(this, generateData());
 
         //Alustetaan listview käyttöön
-        listView = (ListView) findViewById(R.id.buttonListView);
+        listView = findViewById(R.id.buttonListView);
         listView.setAdapter(buttonListViewAdapter);
         cdd=new CustomDialogClass(this);
 
@@ -62,135 +68,45 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
+
+    public void checkRawResources()
+    {
+        audioList = new ArrayList<>();
+        Field[] raws = R.raw.class.getFields();
+        for (Field f : raws) {
+            //if the raw name contains "bain" in the filename...
+            //if (f.getName().contains("bain"))
+            audioList.add(getResources().getIdentifier(f.getName(), "raw", getPackageName()));
+            Log.d("RAW", String.valueOf(getResources().getIdentifier(f.getName(), "raw", getPackageName())));
+        }
+    }
+
     public void onBainButtonClicked(View v)
     {
         if(!isThreadPlaying)
         {
         Button bt=(Button)v;
         int id = bt.getId();
-        switch (id)
+
+        if(id < audioList.size())
         {
-            case 0:
-                resources = R.raw.bain_civilians;
-                bainPhraseString = "Civilians.";
-                break;
-            case 1:
-                resources = R.raw.bain_alarm;
-                bainPhraseString = "That's the alarm, time to do some heavy lifting.";
-                break;
-            case 2:
-                resources = R.raw.bain_boss;
-                bainPhraseString = "Show them whos boss.";
-                break;
-            case 3:
-                resources = R.raw.bain_busy;
-                bainPhraseString = "Looks like we're about to get busy.";
-                break;
-            case 4:
-                resources = R.raw.bain_cleanercosts;
-                bainPhraseString = "Don't kill civilians.";
-                break;
-            case 5:
-                resources = R.raw.bain_flashlight;
-                bainPhraseString = "Stay out of the flashlights people.";
-                break;
-            case 6:
-                resources = R.raw.bain_go;
-                bainPhraseString = "Come on guys go!";
-                break;
-            case 7:
-                resources = R.raw.bain_guys;
-                bainPhraseString = "Thats my guys.";
-                break;
-            case 8:
-                resources = R.raw.bain_here_we_go;
-                bainPhraseString = "Here we go.";
-                break;
-            case 9:
-                resources = R.raw.bain_hostage;
-                bainPhraseString = "Alright, let the hostage go and the trade is done.";
-                break;
-            case 10:
-                resources = R.raw.bain_hostage2;
-                bainPhraseString = "a hostage.";
-                break;
-            case 11:
-                resources = R.raw.bain_let_the_hostage_go;
-                bainPhraseString = "Let the hostage go and the trade is done.";
-                break;
-            case 12:
-                resources = R.raw.bain_loot;
-                bainPhraseString = "Don't let them take your loot.";
-                break;
-            case 13:
-                resources = R.raw.bain_sniper;
-                bainPhraseString = "Sniper rooftop.";
-                break;
-            case 14:
-                resources = R.raw.bain_yes;
-                bainPhraseString = "YES.";
-                break;
-            case 15:
-                resources = R.raw.bain_two;
-                bainPhraseString = "That's two one more to go.";
-                break;
-            case 16:
-                resources = R.raw.bain_escape;
-                bainPhraseString = "Vans here, say it again the escape vans here.";
-                break;
-            case 17:
-                resources = R.raw.bain_needcivilians;
-                bainPhraseString = "Remember guys we need ____ civilians.";
-                break;
-            case 18:
-                resources = R.raw.bain_civilians;
-                bainPhraseString = "Civilians.";
-                break;
-            case 19:
-                resources = R.raw.bain_you_guys_are_killing_it_there_snipers_are_brought_in_people;
-                bainPhraseString = "You guys are killing it in there, snipers are brought in people.";
-                break;
-            case 20:
-                resources = R.raw.bain_we_are_trying_our_luck_out_here;
-                bainPhraseString = "We are trying our luck out here";
-                break;
-            case 21:
-                resources = R.raw.bain_two_minutes;
-                bainPhraseString = "Two minutes!";
-                break;
-            case 22:
-                resources = R.raw.bain_they_dont_want_to_this_be_over_sniper_are_in_the_surrounding_buildings;
-                bainPhraseString = "They dont want to this to be over, sniper are in the surrounding_buildings";
-                break;
-            case 23:
-                resources = R.raw.bain_they_brought_in_snipers;
-                bainPhraseString = "They brought in snipers.";
-                break;
-            case 24:
-                resources = R.raw.bain_they_are_coming;
-                bainPhraseString = "They are coming.";
-                break;
-            case 25:
-                resources = R.raw.bain_police_heli_coming_in;
-                bainPhraseString = "Police  heli coming in.";
-                break;
-            case 26:
-                resources = R.raw.bain_get_the_bag_on_the_van_guys;
-                bainPhraseString = "Get the bag on the van guys.";
-                break;
-            case 27:
-                resources = R.raw.bain_come_on_come_on_only_couple_of_seconds_left_guys_police_are_on_their_way;
-                bainPhraseString = "Come on come on only couple of seconds left guys police are on their way";
-                break;
-            default:
-                resources = R.raw.bain_civilians;
-                bainPhraseString = "Civilians.";
-                break;
+            resources = audioList.get(id);
+        }
+        else
+        {
+            resources = R.raw.bain_looks_like_we_are_about_to_get_busy;
         }
 
         buttonId = v.getId();
         setButtonPlaying(true, buttonId);
         Log.d("Button pressed", String.valueOf(v.getId()));
+        bainPhraseString = getResources().getResourceName(resources);
+        bainPhraseString = bainPhraseString.replace("_i_", "_I_");
+        bainPhraseString = bainPhraseString.replace("tuomomees.bain_soundboard_app:raw/bain", "");
+        bainPhraseString = bainPhraseString.replace("_", " ");
+        bainPhraseString = bainPhraseString.substring(1, 2).toUpperCase() + bainPhraseString.substring(2);
+        bainPhraseString = bainPhraseString + ".";
+
         bainPhraseTextView.setText(bainPhraseString);
 
             if(bainSoundPlayerThread == null)
@@ -211,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         }
     }
 
+
+
     public void onAboutButtonClicked(View v)
     {
 
@@ -226,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                 Drawable icon = ResourcesCompat.getDrawable(getResources(), R.drawable.play_icon, null);
                 while(running)
                 {
-                    button = (Button) findViewById(btnId);
+                    button = findViewById(btnId);
                         if(isButtonPlaying)
                         {
                             isThreadPlaying = true;
@@ -256,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
                                     e.printStackTrace();
                                 }
 
-                                bainPhraseTextView.setText("");
+                                //bainPhraseTextView.setText("");
                                 boolean isEllipsize = !((bainPhraseTextView.getLayout().getText().toString()).equalsIgnoreCase(bainPhraseString));
                             }
                         }
@@ -278,6 +196,14 @@ public class MainActivity extends AppCompatActivity implements BainSoundPlayerTh
         models.add(new RowItemModel(19, 20, 21));
         models.add(new RowItemModel(22, 23, 24));
         models.add(new RowItemModel(25,26,27));
+
+        models.add(new RowItemModel(28,29,30));
+        models.add(new RowItemModel(31,32,33));
+        models.add(new RowItemModel(34,35,36));
+        models.add(new RowItemModel(37,38,39));
+        models.add(new RowItemModel(40,41,42));
+        models.add(new RowItemModel(43,44,45));
+
         return models;
     }
 }
