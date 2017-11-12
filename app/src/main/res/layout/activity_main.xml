@@ -40,4 +40,5 @@ android:background="@drawable/background_image"
                 android:id="@+id/buttonListView">
             </ListView>
         </TableRow>
+
 </TableLayout>

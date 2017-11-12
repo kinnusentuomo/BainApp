@@ -9,10 +9,20 @@
     </style>
 
     <style name="ButtonStyle">
+        <item name="android:shadowColor">@color/colorBlack</item> <!-- #444444 -->
+        <item name="android:shadowDx">1</item> <!-- 1 -->
+        <item name="android:shadowDy">1</item> <!-- 1 -->
+        <item name="android:shadowRadius">15</item> <!-- 9 -->
+
+
+        <item name="android:gravity">bottom|center</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">10</item>
         <item name="android:foregroundGravity">center</item>
         <item name="android:background">@drawable/bain_button</item>
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 

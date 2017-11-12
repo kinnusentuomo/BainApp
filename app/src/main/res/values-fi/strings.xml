@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Bain SoundBoard App beta</string>
+    <string name="app_name">Bain SoundBoard App</string>
     <string name="about_text">Sovelluksen on tehnyt Tuomo Kinnunen (tuomomees App Lab) 2017.  Sovellus on täysin mainosvapaa. Mainokset tarjoavat todella pienen rahantulon, jonka vuoksi ne eivät ole päiväsi pilaamisen arvoisia. Jos sinulla jäi jotain mielen päälle, käytäthän palaute -nappulaa.</string>
     <string name="app_label_text">Bain Soundboard App</string>
     <string name="choose_feedback_delivering">Lähetän palautetta seuraavan sovelluksen avulla.</string>
@@ -11,4 +11,14 @@
     <string name="notsupport_text">Ehkä sinun tulisi tukea ensi kerralla.</string>
     <string name="support_text">Kiitoksia tukemisesta!</string>
     <string name="feedback_address">feedback.tuomomees.applab@gmail.com</string>
+    <string name="share_audio_text">Lähetä äänitiedosto ohjelmalla</string>
+    <string name="FullScreenAd">ca-app-pub-4117339910887954/7946825989</string>
+    <string name="share_audio_error_text">Äänitiedostoa ei voitu jakaa, yritä uudelleen.</string>
+    <string name="dialog_menu_label">Miten haluat käyttää äänitiedostoa</string>
+    <string name="ringtone">soittoäänenä</string>
+    <string name="notification_sound">ilmoitusäänenä</string>
+    <string name="share">jakaa</string>
+    <string name="are_you_sure">Oletko varma?</string>
+    <string name="is_going_to_be_your_ringtone">tulee olemaan soittoäänesi.</string>
+    <string name="is_going_to_be_your_notification">tulee olemaan ilmoitusäänesi.</string>
 </resources>
