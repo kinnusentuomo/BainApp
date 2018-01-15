@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements SoundPlayerThread
         str = str.replace("_didnt_", "_didn't_");
         str = str.replace("_im_", "_I'm_");
         str = str.replace("dont", "don't");
+        str = str.replace("_wont_", "won't");
         //str = str.replace("tuomomees.bain_soundboard_app:raw/bain", "");
         str = str.replace("_", " ");
         str = str.substring(0, 1).toUpperCase() + str.substring(1);

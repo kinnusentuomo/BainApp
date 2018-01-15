@@ -37,6 +37,8 @@
     </style>
 
     <style name="TextViewStyle">
+        <item name="android:maxLines">4</item>
+        <item name="android:lines">4</item>
         <item name="android:background">@drawable/textview_bain_phrase_background_drawable</item>
         <item name="android:layout_marginBottom">12sp</item>
         <item name="android:gravity">center</item>
@@ -49,7 +51,6 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:singleLine">true</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

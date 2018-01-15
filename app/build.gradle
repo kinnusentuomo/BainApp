@@ -7,8 +7,8 @@ android {
         applicationId "tuomomees.bain_soundboard_app"
         minSdkVersion 18
         targetSdkVersion 26
-        versionCode 7
-        versionName '1.5'
+        versionCode 8
+        versionName '1.6 -massive audio update'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -30,5 +30,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.google.android.gms:play-services-ads:11.6.0'
+    compile 'com.google.android.gms:play-services-ads:11.8.0'
 }
