@@ -1,15 +1,20 @@
 package tuomomees.bain_soundboard_app;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +40,19 @@ class NotificationAndRingtoneHandler {
         this.activity = activity;
         this.context = context;
         ringtoneManager = new RingtoneManager(context);
+
+        checkPermission();
+    }
+
+    private void checkPermission()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_DENIED)
+                if (!Settings.System.canWrite(context)) {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + context.getPackageName()));
+                    activity.startActivityForResult(intent, 200);
+                }
+        }
     }
 
     void saveas(int ressound){

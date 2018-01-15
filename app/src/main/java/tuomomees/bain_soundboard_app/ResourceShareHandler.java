@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,14 +31,20 @@ class ResourceShareHandler {
         try {
             //Copy file to external ExternalStorage.
             //String mediaPath = copyFiletoExternalStorage(R.raw.bain_careful_now, "bain_careful_now.ogg");
-            String mediaPath = copyFiletoExternalStorage(resource, context.getResources().getResourceEntryName(resource) + ".ogg");
+            String filename = context.getResources().getResourceEntryName(resource) + ".ogg";
+            String mediaPath = copyFiletoExternalStorage(resource, filename);
 
             Intent shareMedia = new Intent(Intent.ACTION_SEND);
             //set WhatsApp application.
             //shareMedia.setPackage("com.whatsapp");
             shareMedia.setType("audio/ogg");
+
+            File audioFileToShare = new File(mediaPath + filename);
+            Uri uri = Uri.fromFile(audioFileToShare);
+
+
             //set path of media file in ExternalStorage.
-            shareMedia.putExtra(Intent.EXTRA_STREAM, Uri.parse(mediaPath));
+            shareMedia.putExtra(Intent.EXTRA_STREAM, uri);
             context.startActivity(Intent.createChooser(shareMedia, context.getResources().getString(R.string.share_audio_text)));
         } catch (Exception e) {
             Toast.makeText(context.getApplicationContext(), context.getResources().getString(R.string.share_audio_error_text), Toast.LENGTH_LONG).show();
@@ -45,7 +52,11 @@ class ResourceShareHandler {
     }
 
     private String copyFiletoExternalStorage(int resourceId, String resourceName){
-        String pathSDCard = Environment.getExternalStorageDirectory() + "/Android/data/" + resourceName;
+        String pathSDCard = Environment.getExternalStorageDirectory().getPath() + "/media/audio/ringtones/";
+
+        boolean exists = (new File(pathSDCard)).exists();
+        if (!exists){new File(pathSDCard).mkdirs();}
+
         try{
             InputStream in = context.getResources().openRawResource(resourceId);
             FileOutputStream out = new FileOutputStream(pathSDCard + resourceName);

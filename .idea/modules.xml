@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BainApp.iml" filepath="$PROJECT_DIR$/BainApp.iml" />
-      <module fileurl="file://C:\Users\tuomo\AndroidStudioProjects\BainApp\BainApp\Bain_SoundBoard_App.iml" filepath="C:\Users\tuomo\AndroidStudioProjects\BainApp\BainApp\Bain_SoundBoard_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements SoundPlayerThread
         Log.d("Painikelistan koko", rowAmount + "x" + cellAmount);
 
         ArrayList<Integer> array = new ArrayList<>();
-        array.add(1);
+        //array.add(1);
         int limiter;
         int id1 = 0, id2 = 0, id3 = 0;
         String buttonText1 = "", buttonText2 = "", buttonText3 = "";
